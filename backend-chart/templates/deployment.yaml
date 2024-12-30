@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: i-httpd
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: i-httpd
+  template:
+    metadata:
+      labels:
+        app: i-httpd
+    spec:
+      containers:
+      - name: i-httpd
+        image: samjsx/i-httpd:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 80
